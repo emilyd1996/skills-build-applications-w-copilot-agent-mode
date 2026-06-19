@@ -6,7 +6,11 @@ export default function Teams() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchJson('teams')
+    const url = (import.meta.env.VITE_CODESPACE_NAME && import.meta.env.VITE_CODESPACE_NAME !== 'undefined')
+      ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams`
+      : 'http://localhost:8000/api/teams'
+
+    fetchJson(url)
       .then((data) => setTeams(data))
       .catch((err) => setError(err.message))
   }, [])

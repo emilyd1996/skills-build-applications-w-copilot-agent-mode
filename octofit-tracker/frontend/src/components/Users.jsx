@@ -6,7 +6,11 @@ export default function Users() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchJson('users')
+    const url = (import.meta.env.VITE_CODESPACE_NAME && import.meta.env.VITE_CODESPACE_NAME !== 'undefined')
+      ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users`
+      : 'http://localhost:8000/api/users'
+
+    fetchJson(url)
       .then((data) => setUsers(data))
       .catch((err) => setError(err.message))
   }, [])

@@ -6,7 +6,11 @@ export default function Workouts() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchJson('workouts')
+    const url = (import.meta.env.VITE_CODESPACE_NAME && import.meta.env.VITE_CODESPACE_NAME !== 'undefined')
+      ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/workouts`
+      : 'http://localhost:8000/api/workouts'
+
+    fetchJson(url)
       .then((data) => setWorkouts(data))
       .catch((err) => setError(err.message))
   }, [])

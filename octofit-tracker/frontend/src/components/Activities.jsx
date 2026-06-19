@@ -6,7 +6,11 @@ export default function Activities() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchJson('activities')
+    const url = (import.meta.env.VITE_CODESPACE_NAME && import.meta.env.VITE_CODESPACE_NAME !== 'undefined')
+      ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities`
+      : 'http://localhost:8000/api/activities'
+
+    fetchJson(url)
       .then((data) => setActivities(data))
       .catch((err) => setError(err.message))
   }, [])
