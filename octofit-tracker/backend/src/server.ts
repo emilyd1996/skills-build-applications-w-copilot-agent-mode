@@ -27,7 +27,7 @@ connectToDatabase()
     app.listen(port, () => {
       console.log(`Server listening on port ${port}`)
       if (codeSpaceName) {
-        console.log(`Codespace API URL: https://${codeSpaceName}-8000.githubpreview.dev`)
+        console.log(`Codespace API URL: https://${codeSpaceName}-8000.app.github.dev`)
       }
     })
   })
